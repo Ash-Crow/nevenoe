@@ -19,7 +19,9 @@ See the documentation of https://github.com/arulrajnet/attila[Attila] theme.
 [[specificities]]
 == Specificities
 Divergences from Attila theme:
-- Adds a home template for a static home page, that showcases the author bio.
+
+* Adds a home template for a static home page, that showcases the author bio.
+* Icons from https://icomoon.io
 
 [[copyright-license]]
 == Copyright & License
