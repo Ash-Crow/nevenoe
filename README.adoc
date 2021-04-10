@@ -24,9 +24,9 @@ Divergences from Attila theme:
 [[copyright-license]]
 == Copyright & License
 
-Copyright (c) 2015-2016 Peter Amende - Released under The MIT License.
-Copyright (c) 2016 Arulraj V - Released under The MIT License.
-Copyright (c) 20121 Sylvain Boissel - Released under The MIT License.
+* Copyright (c) 2015-2016 Peter Amende - Released under The MIT License.
+* Copyright (c) 2016 Arulraj V - Released under The MIT License.
+* Copyright (c) 20121 Sylvain Boissel - Released under The MIT License.
 
 Some background images used from
 https://github.com/gilsondev/pelican-clean-blog
