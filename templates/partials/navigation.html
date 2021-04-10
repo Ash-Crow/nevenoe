@@ -9,7 +9,9 @@
 
       {% if DISPLAY_PAGES_ON_MENU %}
           {% for p in pages %}
+            {% if p.save_as != 'index.html' %} {# Dont list the page if it is a static home #}
               <li{% if p == page %} class="nav-{{p.slug}} active"{% endif %} role="presentation"><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+            {% endif %}
           {% endfor %}
       {% else %}
           {% if DISPLAY_CATEGORIES_ON_MENU %}
