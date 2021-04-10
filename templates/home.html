@@ -1,0 +1,119 @@
+{% extends "index.html" %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block canonical_url %}
+<link href="{{ SITEURL }}/{{ page.url }}" rel="canonical" />
+{% endblock canonical_url %}
+
+{# <!-- Choosing cover image --> #}
+{% if page.cover %}
+  {% if page.cover|lower|truncate(4, True, '') == "http" %}
+    {% set selected_cover = page.cover %}
+  {% else %}
+    {% set selected_cover = SITEURL+"/"+page.cover %}
+  {% endif %}
+{% elif page.og_image %}
+  {% if page.og_image|lower|truncate(4, True, '') == "http" %}
+    {% set selected_cover = page.og_image %}
+  {% else %}
+    {% set selected_cover = SITEURL+"/"+page.og_image %}
+  {% endif %}
+{% elif HEADER_COVER %}
+  {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
+    {% set selected_cover = HEADER_COVER %}
+  {% else %}
+    {% set selected_cover = SITEURL+"/"+HEADER_COVER %}
+  {% endif %}
+{% elif page.color %}
+  {% set selected_color = page.color %}
+{% elif HEADER_COLOR %}
+  {% set selected_color = HEADER_COLOR %}
+{% endif %}
+
+{% block header %}
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" {% if selected_cover or selected_color %}class="has-cover"{% endif %}>
+      <div class="inner">
+        <nav id="navigation">
+          {% if SITE_LOGO %}
+            <span class="blog-logo">
+                <a href="{{ SITEURL }}/"><img src="{{SITE_LOGO}}" alt="Blog Logo" /></a>
+            </span>
+          {% else %}
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="{{ SITEURL }}/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          {% endif %}
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        {% if selected_cover %}
+            <div class="blog-cover cover" style="background-image: url('{{ selected_cover }}')">
+        {% elif selected_color %}
+            <div class="blog-cover cover" style="background-color: {{ selected_color }}">
+        {% endif %}
+      </div>
+    </header>
+
+
+    {% if AUTHORS_BIO and page.author.name.lower() in AUTHORS_BIO %}
+      {% set author_bio = AUTHORS_BIO[page.author.name.lower()] %}
+    <section id="blog-author" {% if selected_cover or selected_color %}class="has-cover"{% endif %} >
+
+        <div class="inner">
+            <aside class="post-author">
+                {% if selected_avatar %}
+                <figure class="post-author-avatar">
+                    <img src="{{author_bio.avatar}}" alt="{{author_bio.name}}" />
+                </figure>
+                {% endif %}
+                <div class="post-author-bio">
+                    <h4 class="post-author-name"><a href="{{ SITEURL }}/{{author_bio.url}}">{{author_bio.name}}</a></h4>
+                    {% if author_bio.bio %}
+                        <p class="post-author-about">{{author_bio.bio}}</p>
+                    {% endif %}
+                    {% if author_bio.location %}
+                        <span class="post-author-location"><i class="ic ic-location"></i> {{author_bio.location}}</span>
+                    {% endif %}
+                    {% if author_bio.website %}
+                        <span class="post-author-website"><a href="{{author_bio.website}}"><i class="ic ic-link"></i> Website</a></span>
+                    {% endif %}
+                    <!-- Social linkes in alphabet order. -->
+                    {% if author_bio.facebook %}
+                        <span class="post-author-facebook"><a target="_blank" href="https://facebook.com/{{author_bio.facebook}}"><i class="ic ic-facebook"></i> Facebook</a></span>
+                    {% endif %}
+                    {% if author_bio.github %}
+                        <span class="post-author-github"><a target="_blank" href="https://github.com/{{author_bio.github}}"><i class="ic ic-link"></i> GitHub</a></span>
+                    {% endif %}
+                    {% if author_bio.linkedin %}
+                        <span class="post-author-linkedin"><a target="_blank" href="https://www.linkedin.com/in/{{author_bio.linkedin}}"><i class="ic ic-link"></i> LinkedIn</a></span>
+                    {% endif %}
+                    {% if author_bio.twitter %}
+                        <span class="post-author-twitter"><a target="_blank" href="https://twitter.com/{{author_bio.twitter}}"><i class="ic ic-twitter"></i> Twitter</a></span>
+                    {% endif %}
+                        <span class="post-author-stats"><i class="ic ic-posts"></i> {{ articles|count }} {% if articles|count > 1 %} posts {% else %} post {% endif %}</span>
+                </div>
+                <div class="clear"></div>
+            </aside>
+        </div>
+    </section>
+    {% endif %}
+
+
+{% endblock header %}
+
+{% block content %}
+  <!-- Post content -->
+  <main class="content" role="main">
+      <article class="post">
+      <div class="inner">
+          <section class="post-content">
+              {{page.content}}
+          </section>
+      </div>
+      </article>
+  </main>
+{% endblock content %}
