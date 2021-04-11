@@ -8,11 +8,16 @@
 
 {#
 <!-- Choosing cover image --> #}
+{% set selected_cover_position = False %}
 {% if page.cover %}
   {% if page.cover|lower|truncate(4, True, '') == "http" %}
     {% set selected_cover = page.cover %}
   {% else %}
     {% set selected_cover = SITEURL+"/"+page.cover %}
+  {% endif %}
+
+  {% if page.cover_position %}
+   {% set selected_cover_position = page.cover_position %}
   {% endif %}
 {% elif page.og_image %}
   {% if page.og_image|lower|truncate(4, True, '') == "http" %}
@@ -20,11 +25,19 @@
   {% else %}
     {% set selected_cover = SITEURL+"/"+page.og_image %}
   {% endif %}
+
+  {% if page.og_image_position %}
+   {% set selected_cover_position = page.og_image_position %}
+  {% endif %}
 {% elif HEADER_COVER %}
   {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
     {% set selected_cover = HEADER_COVER %}
   {% else %}
     {% set selected_cover = SITEURL+"/"+HEADER_COVER %}
+  {% endif %}
+
+  {% if HEADER_COVER_POSITION %}
+    {% set selected_cover_position = HEADER_COVER_POSITION %}
   {% endif %}
 {% elif page.color %}
   {% set selected_color = page.color %}
@@ -43,13 +56,14 @@
       </span>
     </nav>
     {% if selected_cover %}
-    <div class="blog-cover cover" style="background-image: url('{{ selected_cover }}')">
+    <div class="blog-cover cover"
+      style="background-image: url('{{ selected_cover }}');
+      {% if selected_cover_position %} background-position: {{ selected_cover_position }};{% endif %}">
       {% elif selected_color %}
       <div class="blog-cover cover" style="background-color: {{ selected_color }}">
         {% endif %}
       </div>
 </header>
-
 
 {% if AUTHORS_BIO and page.author.name.lower() in AUTHORS_BIO %}
 {% set author_bio = AUTHORS_BIO[page.author.name.lower()] %}
