@@ -22,6 +22,7 @@ Divergences from Attila theme:
 
 * Adds a home template for a static home page, that showcases the author bio.
 * Icons from https://icomoon.io
+* Manage the cover image position
 
 [[copyright-license]]
 == Copyright & License
