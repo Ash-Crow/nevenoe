@@ -90,7 +90,7 @@
         {% if author_bio.wordpress %}
         <span class="post-author-wordpress"><a href="{{author_bio.wordpress}}"><i class="icon-wordpress"></i> Blog</a></span>
         {% endif %}
-        <!-- Social linkes in alphabet order. -->
+        <!-- Social links in alphabet order. -->
         {% if author_bio.facebook %}
         <span class="post-author-facebook"><a target="_blank" href="https://facebook.com/{{author_bio.facebook}}"><i
               class="icon-facebook"></i> Facebook</a></span>
@@ -98,6 +98,10 @@
         {% if author_bio.github %}
         <span class="post-author-github"><a target="_blank" href="https://github.com/{{author_bio.github}}"><i
               class="icon-github"></i> GitHub</a></span>
+        {% endif %}
+        {% if author_bio.mastodon %}
+        <span class="post-author-mastodon"><a rel="me" target="_blank" href="{{author_bio.mastodon}}"><i
+              class="icon-mastodon"></i> Mastodon</a></span>
         {% endif %}
         {% if author_bio.linkedin %}
         <span class="post-author-linkedin"><a target="_blank"
